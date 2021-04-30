@@ -1,0 +1,850 @@
+<div id="top-menu-bar" style="left: 0; position: absolute; right: 0; top: 0; z-index: 5000; background: #707688;">
+    <new4cdesign></new4cdesign>
+    <span>
+        <img src="images/vertical-seperator.png" style="height: 50px;" />
+    </span>
+    <newcbudesign></newcbudesign>
+    <span>
+        <img src="images/vertical-seperator.png" style="height: 50px;" />
+    </span>
+    <cleardesign></cleardesign>
+    <span>
+        <img src="images/vertical-seperator.png" style="height: 50px;" />
+    </span>
+
+    <!--<span id='infoSection' class='menuSection'>
+            <button id='infoButton' class='btn hoverColorChange menuButton' ng-click='setSelectedNavItem($event)' data-nav-target='infoExpanded'>
+                <span class='caret' style='float: right; margin-top: -4px; right: 15px; position: absolute;'></span>
+            </button>
+        </span>
+        <span>
+            <img src="images/vertical-seperator.png" style="height: 50px;" />
+        </span>-->
+    <!--<span id='angleSection' class='menuSection'>
+            <button id='angleButton' class='btn hoverColorChange menuButton' style="width: 93px;" ng-click='setSelectedNavItem($event)' data-nav-target='angleExpanded'>
+                <span class='glyphicon glyphicon-zoom-out'></span><span class='glyphicon glyphicon-resize-horizontal'></span><span class='glyphicon glyphicon-zoom-in'></span>
+                <span class='caret' style='float: right; margin-top: 9px; position: absolute'></span>
+            </button>
+        </span>
+        <span>
+            <img src="images/vertical-seperator.png" style="height: 50px;" />
+        </span>-->
+
+    <cartsection style="float: right;"></cartsection>
+    <span style="float: right;">
+        <img src="images/vertical-seperator.png" style="height: 50px;" />
+    </span>
+    <signinregister style="float: right;"></signinregister>
+    <span id="mysavedprojects" class="menuSection" style="display: none; float: right;">
+        <button id="savedProjectsButton" class="btn menuButton" style="white-space: normal; width: 100px; background: #707688;" ng-click="goToMyProjects()">
+            <span class="menuLabel" style="color: #fff;">
+                My Saved Projects
+            </span>
+        </button>
+        <span>
+            <img src="images/vertical-seperator.png" style="height: 50px;" />
+        </span>
+        <button id="logOutButton" class="btn menuButton" style="width: 75px; background: #707688;" ng-click="logOut()">
+            <span class="menuLabel" style="color: #fff;">
+                Log Out
+            </span>
+        </button>
+    </span>
+    <span style="float: right;">
+        <img src="images/vertical-seperator.png" style="height: 50px;" />
+    </span>
+    <savedesign style="float: right;"></savedesign>
+    <span style="float: right;">
+        <img src="images/vertical-seperator.png" style="height: 50px;" />
+    </span>
+    <span id='applyNumberingSection' class='menuSection' style="float: right; width: 150px; text-align: center;">
+        <button id='numberingButton' class='btn menuButton' style="white-space: normal; width: 115px; background: #707688;" ng-click='setSelectedNavItem($event)' data-nav-target='numberingExpanded'>
+            <span class="menuLabel">
+                <span style="margin-left: -13px; color: #fff;">Custom</span><br /><span style="color:#fff;">Engraving</span>
+            </span>
+            <span class="caret" style="color: #fff; float: right;"></span>
+        </button>
+    </span>
+    <span style="float: right;">
+        <img src="images/vertical-seperator.png" style="height: 50px;" />
+    </span>
+    <span class="currentprojectsection" style="display: none; float: right;">
+        <span id="currentprojectinfo" class='menuSection' style="display: inline-block; height: 55px; margin-top: -3px; padding: 6px 12px; vertical-align: middle; color: #fff;">
+            <span style="display: block; font-weight: bold;">Project Name:&emsp;<span class="menuLabel">{{editingProject.name}}</span></span>
+            <span style="font-weight: bold;">Elevation:&emsp;<span class="menuLabel">{{elevationName}}</span></span>
+        </span>
+        <span>
+            <img src="images/vertical-seperator.png" style="height: 50px;" />
+        </span>
+        <designlist></designlist>
+    </span>
+
+
+    <!-- MODALS -->
+    <!------------------------------------------------------>
+    <!-- New Design -->
+    <div class="modal fade" id="newDesignModal" style="overflow: auto; z-index: 6000;">
+        <div class="modal-dialog" style="max-width: 500px;">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <button type="button" class="close axnmClose" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Close</span>
+                    </button>
+                    <h3 class="modal-title axnmModalTitle">Start New Design</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body">
+                    <p style="text-align: center;">This will start a new design and take you to the 4C Configurator home page. Do you want to continue?</p>
+                    <div style="text-align: center;">
+                        <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal" ng-click="goToNewDesign()" style="margin-right: 20px;">Yes</button>
+                        <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New 4C Design -->
+    <div class="modal fade" id="new4CDesignModal" style="overflow: auto; z-index: 6000;">
+        <div class="modal-dialog" style="max-width: 500px;">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <button type="button" class="close axnmClose" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Close</span>
+                    </button>
+                    <h3 class="modal-title axnmModalTitle">Start New Design</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body">
+                    <p style="text-align: center;">This will start a new design and take you to the 4C Configurator home page. Do you want to continue?</p>
+                    <div style="text-align: center;">
+                        <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal" ng-click="goToNew4CDesign()" style="margin-right: 20px;">Yes</button>
+                        <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New CBU Design -->
+    <div class="modal fade" id="newCBUDesignModal" style="overflow: auto; z-index: 6000;">
+        <div class="modal-dialog" style="max-width: 500px;">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <button type="button" class="close axnmClose" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Close</span>
+                    </button>
+                    <h3 class="modal-title axnmModalTitle">Start New Design</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body">
+                    <p style="text-align: center;">This will start a new design and take you to the CBU Configurator home page. Do you want to continue?</p>
+                    <div style="text-align: center;">
+                        <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal" ng-click="goToNewCBUDesign()" style="margin-right: 20px;">Yes</button>
+                        <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clear Design -->
+    <div class="modal fade" id="confirmClearConfig" style="overflow: auto; z-index: 6000;">
+        <div class="modal-dialog" style="max-width: 500px;">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <button type="button" class="close axnmClose" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Close</span>
+                    </button>
+                    <h3 class="modal-title axnmModalTitle">Clear Design</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body">
+                    <p style="text-align: center;">This will clear your current design.</p>
+                    <p style="text-align: center;">Are you sure you want to continue?</p>
+                    <div style="text-align: center;">
+                        <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal" ng-click="clearConfiguration()" style="margin-right: 20px;">Yes</button>
+                        <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm -->
+    <div class="modal fade" style="overflow: auto; padding-top: 50px; z-index: 9999;" id="modal_confirm" tabindex="-1" role="dialog" aria-labelledby="modal_noneSelectedLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" style="width: 350px;">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <button type="button" class="close axnmClose" data-dismiss="modal" aria-hidden="true" ng-click="confirm_no()">Close</button>
+                    <h3 class="modal-title axnmModalTitle">{{confirm_title}}</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body" style="max-height: 150px; display: table-cell;">
+                    <div class="col-md-12" style="display: inline-block">
+                        <img ng-show="confirm_showPic" src="images/warning.png" class="col-md-2" style="padding: 4px 10px 0px 0px;" />
+                        <div class="col-md-10" style="padding: 0;">
+                            {{confirm_message}}
+                        </div>
+                        <br />
+                        <div class="col-md-12" ng-if="showCustomColorTextBox" style="top: -18px;">
+                            <br />
+                            Custom Color Code: <input type="text" ng-model="custom_finish_type" id="text_customColorCode" style="height: 20px; width: 113px; border-radius: 0; box-shadow: none;" />
+                            <div style="font-size: smaller; float: right;">
+                                Click to view all available <a href="https://www.mailboxes.com/assets/1/6/4C_Custom_Color_Chart.pdf" onclick="window.open(this.href, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=605,height=400,top=50%,bottom=50%');return false;" style="color: #054E98 !important; font-weight: bold;">custom colors</a> for 4C Horizontal Mailboxes.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer center-text">
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal" ng-click="confirm_yes()" style="margin-right: 20px;">Yes</button>
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal" ng-click="confirm_no()">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart details -->
+    <div class="modal fade bs-example-modal-lg" id="cartDetails" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="overflow: auto;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <h3 class="modal-title axnmModalTitle eighty">Shopping Cart Details</h3>
+                    <a href="#" class="close axnmClose" style="margin-top:10px;" data-dismiss="modal" aria-hidden="true">Close</a>
+                </div>
+                <div class="modal-body">
+                    <table style="margin-bottom: 10px; color: #000;">
+                        <thead>
+                            <tr style="background-color: #c6c9d0; color: #333; font-weight: bold; text-align: center;">
+                                <th style="background-color: #c6c9d0; text-align: center; width: 5%;">
+                                    QTY
+                                </th>
+                                <th style="background-color: #c6c9d0; text-align: center; width: 10%;">
+                                    MODEL #
+                                </th>
+                                <th style="background-color: #c6c9d0; text-align: left; width: 65%;">
+                                    DESCRIPTION
+                                </th>
+                                <th style="background-color: #c6c9d0; text-align: right; width: 10%;">
+                                    UNIT PRICE
+                                </th>
+                                <th style="background-color: #c6c9d0; text-align: right; width: 10%;">
+                                    PRICE
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="pArr in designProducts">
+                                <td style="text-align: center; width: 8%;">
+                                    {{pArr[1].length}}
+                                </td>
+                                <td style="text-align: left; width: 20%;">
+                                    {{pArr[1][0].productNumber}}
+                                </td>
+                                <td style="width: 40%;">
+                                    {{pArr[1][0].attributes.LongDescription || pArr[1][0].description}}
+                                </td>
+                                <td style="text-align: right; width: 10%;">
+                                    <span ng-if="pArr[1][0].undiscountedPrice" style="text-decoration:line-through;">{{pArr[1][0].undiscountedPrice | currency}}</span>
+                                    <span ng-class="pArr[1][0].undiscountedPriceViewableClass">{{pArr[1][0].price | currency }}</span>
+                                </td>
+                                <td style="text-align: right; width: 10%;">
+                                    {{pArr[1][0].price * pArr[1].length | currency }}
+                                </td>
+                            </tr>
+                            <tr style="border-top: 1px solid #bbbbbb; font-size: 18px;">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="font-weight: bold; padding-bottom: 25px; padding-top: 25px; text-align: right; width: 100%;">Subtotal:</td>
+                                <td style="font-weight: bold; padding-right: 20px; text-align: right;">{{totals.price | currency}}</td>
+                            </tr>
+                    </table>
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn btn-lg" id="cartDetails_Checkout" style="margin: 0 6px 20px 6px; min-width: 216px; color: #fff; background-color: #DA292E; font-weight: bold;" data-dismiss="modal" ng-click="ignoreDuplicates=false;checkout();">CHECKOUT</button>
+                    <button class="btn btn-lg axnmModalButtonPri" style="margin: 0 6px 20px 6px; min-width: 125px; color: #fff; background-color: #1f2c4c !important;" data-dismiss="modal" ng-click="ignoreDuplicates=false;getSaveDetails();">SAVE DESIGN</button>
+                    <button class="btn btn-lg axnmModalButtonPri" style="margin: 0 6px 20px 6px; min-width: 125px; color: #fff; background-color: #1f2c4c !important;" data-dismiss="modal" ng-click="clearConfigModal()">CLEAR CART</button>
+                    <button class="btn btn-lg axnmModalButtonPri" style="margin: 0 6px 20px 6px; min-width: 125px; color: #fff; background-color: #1f2c4c !important;" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign In / Register -->
+    <div ng-form name="loginModal" class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow: auto; z-index: 9999;">
+        <div class="modal-dialog" style="width: 570px;">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <button type="button" class="close axnmClose" data-dismiss="modal" aria-hidden="true" ng-click="logInReset(true)">
+                        <span aria-hidden="true">Close</span>
+                    </button>
+                    <h3 class="modal-title axnmModalTitle">4C Configurator Sign In</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body" style="height: 300px;">
+                    <div class="col-xs-12">
+                        <span class="col-xs-8" style="color: red; left: 0; margin-bottom: 16px; margin-left: 16px; position: absolute;">{{logInMessage}}</span>
+                        <label class="col-xs-4" style="color: red; float: right; padding-right: 0; position: absolute; right: 0;">(Note - mailboxes.com registered users must re-register to access 4C Configurator)</label>
+                        <span class="col-xs-7" style="font-weight: bold; margin-top: 60px; color: #000;">REGISTERED CUSTOMERS</span>
+                        <span class="col-xs-5" style="font-weight: bold;"></span>
+                        <span class="col-xs-8" style="color: #000;">Sign in to view and/or save your project(s).</span>
+                        <span class="col-xs-4" style="font-weight: bold;"></span>
+                        <br />
+                        <div class="col-xs-12" style="margin-top: 16px;">
+                            <label for="text_userName" class="col-xs-4" style="margin-top: 15px; color: #000;">
+                                Email:
+                                <span style="color: red; float: none; padding: 5px;" class="" ng-show="loginModal.userName.$error.required">*</span>
+                            </label>
+                            <input type="text" name="userName" ng-model="userName" id="text_userName" ng-keyup="$event.keyCode == 13 && !(loginModal.userName.$invalid || loginModal.passWord.$invalid) ? logIn() : null"
+                                   style="float: none; height: 35px; margin-top: 10px; color: #000;" class="col-xs-8" required>
+                        </div>
+                        <div class="col-xs-12">
+                            <label for="text_passWord" class="col-xs-4" style="margin-top: 15px; color: #000;">
+                                Password:
+                                <span style="color: red; float: none; padding: 5px;" class="" ng-show="loginModal.passWord.$error.required">*</span>
+                            </label>
+                            <input type="password" name="passWord" ng-model="passWord" id="text_passWord" ng-keyup="$event.keyCode == 13 && !(loginModal.userName.$invalid || loginModal.passWord.$invalid) ? logIn() : null"
+                                   style="float: none; height: 35px; margin-top: 10px; color: #000;" class="col-xs-8" required>
+                        </div>
+                        <div class="col-xs-12">
+                            <a class="col-xs-4" style="margin-top:6px;" href="#" ng-click="recoverPassword()">Forgot Password?</a>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="button" class="btn btn-primary axnmModalButtonPri" ng-click="logIn()" style="margin: 8px; /*margin:6px;*/"
+                                ng-disabled="loginModal.userName.$invalid || loginModal.passWord.$invalid">
+                            Sign In
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-header axnmModalHeader" style="border-radius: 0;">
+                    <h3 class="modal-title axnmModalTitle">4C Configurator Registration</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body" style="height: 345px;">
+                    <div class="col-xs-12">
+                        <label class="col-xs-12" style="font-weight: bold; text-align: center; color: #000;">NEW TO MAILBOXES.COM 4C CONFIGURATOR? REGISTER BELOW.</label>
+                        <br />
+                        <div class="col-xs-12">
+                            <label for="text_userNameReg" class="col-xs-4" style="margin-top: 15px; color: #000;">
+                                Email:
+                                <span style="color: red; float: none; padding: 5px;" class="" ng-show="loginModal.userNameReg.$error.required">*</span>
+                            </label>
+                            <input type="text" name="userNameReg" ng-model="userNameReg" id="text_userNameReg" ng-keyup="$event.keyCode == 13 && !(loginModal.userNameReg.$invalid || loginModal.passWordReg.$invalid || loginModal.confPassWordReg.$invalid) ? register() : null"
+                                   style="float: none; height: 35px; margin-top: 10px; color: #000;" class="col-xs-8" required>
+                        </div>
+                        <div class="col-xs-12">
+                            <span class="col-xs-4"></span>
+                            <span id="passwordHint" class="col-xs-8" style="color: #949494; font-style: italic; margin-top: 6px;">Password must contain a minimum of 6 characters and must contain both numeric and alphabetic characters</span>
+                        </div>
+                        <div class="col-xs-12">
+                            <label for="text_passWordReg" class="col-xs-4" style="margin-top: 15px; color: #000;">
+                                Password:
+                                <span style="color: red; float: none; padding: 5px;" class="" ng-show="loginModal.passWordReg.$error.required">*</span>
+                            </label>
+                            <input type="password" name="passWordReg" ng-model="passWordReg" id="text_passWordReg"
+                                   style="float: none; height: 35px; margin-top: 10px; color: #000;" class="col-xs-8" required>
+                        </div>
+                        <div class="col-xs-12">
+                            <label for="text_confPassWordReg" class="col-xs-4" style="margin-top: 8px; color: #000;">
+                                Confirm<br />Password:
+                                <span style="color: red; float: none; padding: 5px;" class="" ng-show="loginModal.confPassWordReg.$error.required">*</span>
+                            </label>
+                            <input type="password" name="confPassWordReg" ng-model="confPassWordReg" id="text_confPassWordReg" ng-keyup="$event.keyCode == 13 && !(loginModal.userNameReg.$invalid || loginModal.passWordReg.$invalid || loginModal.confPassWordReg.$invalid) ? register() : null"
+                                   style="float: none; height: 35px; margin-top: 10px; color: #000;" class="col-xs-8" required>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="button" class="btn btn-primary axnmModalButtonPri" ng-click="register()"
+                                ng-disabled="loginModal.userNameReg.$invalid || loginModal.passWordReg.$invalid || loginModal.confPassWordReg.$invalid">
+                            Create Account
+                        </button>
+                        <span class="col-xs-12" style="color: red; left: 0; margin-left: 16px; margin-top: 6px;">{{registerMessage}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Design -->
+    <div ng-form name="saveModal" class="modal fade" id="getSaveDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow: auto; z-index: 9999;">
+        <div class="modal-dialog" style="min-width: 900px;" tabindex="-1">
+            <div class="modal-content axnmContent" tabindex="-1">
+                <div class="modal-header axnmModalHeader">
+                    <button type="button" class="close axnmClose" data-dismiss="modal" ng-click="saveModalClose()" aria-hidden="true">Close</button>
+                    <h3 class="modal-title axnmModalTitle">Save Your Design</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body" id="Div3" style="height: 370px; outline: none; text-align: center;" tabindex="-1">
+                    <div class="col-xs-12" style="margin: 0 auto; color: red; height: 30px;">
+                        <label ng-bind="saveModal_headerText"></label>
+                    </div>
+                    <!--<div ng-include src="'compareTemplate.html'" id="Div4" class="overflow-y" style=""></div>-->
+                    <div style="margin: 0 auto;" class="col-xs-12">
+                        <label for="text_projectName" class="col-xs-3" style="margin-top: 10px; text-align: left;">
+                            Create New Project
+                            <span class="" style="color: red;" ng-show="saveModal.textProjectName.$error.required && (!ddlProjectName || ddlProjectName == null)">*</span>
+                        </label>
+                        <input type="text" id="text_projectName" name="textProjectName" ng-model="textProjectName" placeholder="Project name" style="height: 35px;" class="col-xs-8" ng-change="textProjectNameChange()" required />
+                    </div>
+                    <div style="font-weight: bold; margin-top: 73px;">OR select from dropdown below</div>
+                    <div style="margin: 0 auto;" class="col-xs-12">
+                        <!--<input type="text" id="text1" placeholder="Enter Project name" style="height: 45px; margin-top: 10px; width: 75%;"/>-->
+                        <label for="select_project" class="col-xs-3" style="margin-top: 15px; text-align: left;">
+                            Select Existing Project
+                            <span class="" style="color: red;" ng-show="(!ddlProjectName || ddlProjectName == null) && saveModal.textProjectName.$error.required">*</span>
+                        </label>
+                        <select id="select_project" style="height: 35px; margin-top: 10px;" ng-model="ddlProjectName" ng-options="project.name for project in projects | filter: {status: '!Deleted'} | filter: {status: '!Completed'}" class="col-xs-8" ng-change="loadProjectDetails()">
+                            <option value="">Please select from existing projects</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12" style="height: 26px;">&nbsp;</div>
+                    <div style="margin: 0 auto;" class="col-xs-12">
+                        <label for="text_elevationName" class="col-xs-3" style="margin-top: 15px; text-align: left;">
+                            Elevation Name
+                            <span class="" style="color: red;" ng-show="saveModal.elevationName.$error.required">*</span>
+                        </label>
+                        <input ng-model="elevationName" type="text" id="text_elevationName" name="elevationName" value="{{elevationName}}" style="height: 35px; margin-top: 10px;" class="col-xs-8" required />
+                    </div>
+                    <div style="color: #5E7FA1; /*#337ab7;*/font-size: larger; font-weight: bold; margin-bottom: 10px; margin-top: 140px;">Project Information</div>
+                    <div style="margin: 0 auto;" class="col-xs-12">
+                        <label for="text_quote_no" class="col-xs-3" style="margin-top: 15px; text-align: left;">
+                            Quote Number
+                        </label>
+                        <input ng-model="quoteNumber" type="text" id="text_quote_no" name="quoteNumber" value="{{quoteNumber}}" style="height: 35px; margin-top: 10px;" class="col-xs-8" />
+                    </div>
+                    <div style="color: red; float: right; font-style: italic; margin: 10px;">* Required fields</div>
+                </div>
+                <div class="modal-footer center-text">
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" style="border-radius: 6px; width: 18%;"
+                            ng-click="saveDesign(true, false, false)" ng-disabled="saveModal.elevationName.$error.required || (saveModal.textProjectName.$error.required && (!ddlProjectName || ddlProjectName == null))">
+                        SAVE
+                    </button>
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" style="border-radius: 6px; width: 35%;"
+                            ng-click="saveDesign(false, true, false, false)" ng-disabled="saveModal.elevationName.$error.required || (saveModal.textProjectName.$error.required && (!ddlProjectName || ddlProjectName == null))">
+                        SAVE & Add Another 4C Elevation
+                    </button>
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" style="border-radius: 6px; width: 35%;"
+                            ng-click="saveDesign(false, false, true, false)" ng-disabled="saveModal.elevationName.$error.required || (saveModal.textProjectName.$error.required && (!ddlProjectName || ddlProjectName == null))">
+                        SAVE & Add Another CBU Elevation
+                    </button>
+                </div>
+                <div class="modal-footer center-text">
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" style="border-radius: 6px; width: 30%;"
+                            ng-click="saveDesign(false, false,false,true)" ng-disabled="saveModal.elevationName.$error.required || (saveModal.textProjectName.$error.required && (!ddlProjectName || ddlProjectName == null))">
+                        SAVE & Exit to My Projects
+                    </button>
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" data-dismiss="modal" ng-click="saveModalClose()" style="border-radius: 6px; width: 18%;">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error -->
+    <div class="modal fade" style="overflow: auto; padding-top: 50px; z-index: 9999;" id="modal_error" tabindex="-1" role="dialog" aria-labelledby="modal_noneSelectedLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 353px;">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <button type="button" class="close axnmClose" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <h3 class="modal-title axnmModalTitle">Error</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body" style="min-height: 120px;">
+                    <div class="col-md-12">
+                        <img src="images/warning.png" class="col-md-3" />
+                        <div class="col-md-9" style="padding: 0;">
+                            {{modal_errorMessage}}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer center-text">
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" style="border-radius: 6px;" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blank engraving boxes proceed?-->
+    <div class="modal fade" style="overflow: auto; padding-top: 50px; z-index: 9999;" id="blankEngraving_modal" tabindex="-1" role="dialog" aria-labelledby="modal_noneSelectedLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 350px;">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <button type="button" class="close axnmClose" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <h3 class="modal-title axnmModalTitle">Blank Engraving</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body" style="min-height: 120px;">
+                    <div class="col-md-12">
+                        <img src="images/warning.png" class="col-md-3" />
+                        <div class="col-md-9" style="padding: 0;">
+                            You have {{blankEngraving_number}} blank door engraving(s), would you like to proceed?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer center-text">
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" style="border-radius: 6px;" data-dismiss="modal" ng-click="proceedWithBlankEngraving()">Yes</button>
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" style="border-radius: 6px;" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ask for Project Name During Checkout -->
+    <div class="modal fade" style="overflow: auto; padding-top: 50px; z-index: 9999;" id="projectName_modal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modal_noneSelectedLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 385px;">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <button type="button" class="close axnmClose" data-dismiss="modal" aria-hidden="true" ng-click="projectName_modal_set()">Close</button>
+                    <h3 class="modal-title axnmModalTitle">Project Name</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body" style="min-height: 120px;">
+                    <div class="col-md-12" style="text-align: center;">
+                        <label ng-if="enterprojectnameagain" style="color:red;margin-bottom:6px;display:block;">Project name entered already exists.</label>
+                        Please enter a name for your project.
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-5" style="margin-top:20px;">
+                            Project Name
+                        </div>
+                        <div class="col-md-6">
+                            <input ng-model="project_modal_name" type="text" style="margin-top:20px;" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer center-text">
+                    <button type="button" class="btn btn-primary axnmModalButtonPri" style="border-radius: 6px;" data-dismiss="modal" ng-click="projectName_modal_set()">Continue With Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Customer Info Modal -->
+    <div ng-form name="customerinfo" class="modal fade bs-example-modal-lg save-project done-configuring-modal update-customer-info-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content axnmContent">
+                <div class="modal-header axnmModalHeader">
+                    <h3 class="model-title axnmModalTitle">Update Customer Information</h3>
+                </div>
+                <div class="axnmHR"></div>
+                <div class="modal-body" style="height:514px;text-align:center;">
+                    <div class="col-xs-6" style="float: left;">
+                        <span class="h3 dark_blue_text" style="text-align: left; padding: 5px;">Customer Information</span>
+                        <br /><br /><br /><br />
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label for="addressContactName" style="float: left; vertical-align: middle">Contact Name<span class="" style="color: red;" ng-show="customerinfo.address_contact_name.$error.required"> *</span></label>
+                            <input id="addressContactName" type="text" style="float: right;" name="address_contact_name" ng-model="address_contact_name" maxlength="100" ng-maxlength="100" required>
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label style="float: left;">Company Name</label>
+                            <input type="text" style="float: right;" ng-model="address_company_name" maxlength="200" ng-maxlength="200" />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label for="addressLine1" style="float: left;">Address Line 1<span class="" style="color: red;" ng-show="customerinfo.address_line_1.$error.required"> *</span></label>
+                            <input id="addressLine1" type="text" style="float: right;" name="address_line_1" ng-model="address_line_1" maxlength="100" ng-maxlength="100" required />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label style="float: left;">Address Line 2</label>
+                            <input type="text" style="float: right;" ng-model="address_line_2" maxlength="50" ng-maxlength="50" />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label for="addressCity" style="float: left;">City<span class="" style="color: red;" ng-show="customerinfo.address_city.$error.required"> *</span></label>
+                            <input id="addressCity" type="text" style="float: right;" name="address_city" ng-model="address_city" maxlength="100" ng-maxlength="100" required />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label for="addressState" style="float: left;">State/Province<span class="" style="color: red;" ng-show="customerinfo.address_state.$error.required"> *</span></label>
+                            <input id="addressState" type="text" style="float: right;" name="address_state" ng-model="address_state" maxlength="100" ng-maxlength="100" required />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label for="addressZip" style="float: left;">Zip/Postal Code<span class="" style="color: red;" ng-show="customerinfo.address_zip.$error.required"> *</span></label>
+                            <input id="addressZip" type="text" style="float: right;" name="address_zip" ng-model="address_zip" maxlength="50" ng-maxlength="50" required />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label for="addressPhone" style="float: left;">Phone<span class="" style="color: red;" ng-show="customerinfo.address_phone.$error.required"> *</span></label>
+                            <input id="addressPhone" type="text" style="float: right;" name="address_phone" ng-model="address_phone" maxlength="50" ng-maxlength="50" required />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label style="float: left;">Email</label>
+                            <input type="text" style="float: right;" ng-model="address_work_email" maxlength="255" ng-maxlength="255" />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label style="float: left;">Fax</label>
+                            <input type="text" style="float: right;" ng-model="address_fax" maxlength="50" ng-maxlength="50" />
+                        </fieldset>
+                    </div>
+                    <div class="col-xs-6" style="float: right;">
+                        <span class="h3 dark_blue_text" style="text-align: left; padding: 5px;">Shipping Information</span>
+                        <br />
+                        <br />
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label>Use My Customer Information</label>&nbsp;
+                            <input type="checkbox" ng-model="set_shipping" ng-click="defaultShippingInfo()" />
+                        </fieldset>
+                        <br /><br />
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label style="float: left;">Contact Name</label>
+                            <input type="text" style="float: right;" ng-model="address_shipto_contact_name" maxlength="100" ng-maxlength="100" />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label style="float: left;">Company Name</label>
+                            <input type="text" style="float: right;" ng-model="address_shipto_company_name" maxlength="200" ng-maxlength="200" />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label style="float: left;">Address Line 1</label>
+                            <input type="text" style="float: right;" ng-model="address_shipto_line_1" maxlength="100" ng-maxlength="100" />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label style="float: left;">Address Line 2</label>
+                            <input type="text" style="float: right;" ng-model="address_shipto_line_2" maxlength="100" ng-maxlength="100" />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label for="addressShiptoCity" style="float: left;">City<span class="" style="color: red;" ng-show="customerinfo.address_shipto_city.$error.required"> *</span></label>
+                            <input id="addressShiptoCity" type="text" style="float: right;" name="address_shipto_city" ng-model="address_shipto_city" maxlength="100" ng-maxlength="100" required />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label for="addressShiptoState" style="float: left;">State/Province<span class="" style="color: red;" ng-show="customerinfo.address_shipto_state.$error.required"> *</span></label>
+                            <input id="addressShiptoState" type="text" style="float: right;" name="address_shipto_state" ng-model="address_shipto_state" maxlength="100" ng-maxlength="100" required />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label for="addressShiptoZip" style="float: left;">Zip/Postal Code<span class="" style="color: red;" ng-show="customerinfo.address_shipto_zip.$error.required"> *</span></label>
+                            <input id="addressShiptoZip" type="text" style="float: right;" name="address_shipto_zip" ng-model="address_shipto_zip" maxlength="50" ng-maxlength="50" required />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label style="float: left;">Phone</label>
+                            <input type="text" style="float: right;" ng-model="address_shipto_phone" maxlength="50" ng-maxlength="50" />
+                        </fieldset>
+                        <fieldset class="col-xs-12" style="padding-bottom: 5px;">
+                            <label style="float: left;">Email</label>
+                            <input type="text" style="float: right;" ng-model="address_shipto_work_email" maxlength="255" ng-maxlength="255" />
+                        </fieldset>
+                    </div>
+                    <div class="col-xs-12" style="text-align: right;">
+                        <label style="color: red;">* Required Fields</label>
+                    </div>
+                </div>
+                <div class="modal-footer center-text">
+                    <button class="btn btn-primary axnmModalButtonPri" style="width: 200px;" ng-click="CloseUpdateCustomerInfo()">Cancel Checkout</button>
+                    <button class="btn btn-primary axnmModalButtonPri" style="width: 200px;" ng-click="ClearUpdateCustomerInfo()">Clear Fields</button>
+                    <button class="btn btn-primary axnmModalButtonPri" style="width: 200px;" ng-click="UpdateCustomerInfoSet()" ng-disabled="customerinfo.$invalid">
+                        Continue With Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- EXPANDABLES -->
+    <!------------------------------------------------------>
+    <!-- Info Section -->
+    <div id="infoExpanded" class="itemExpanded">
+        <form>
+            <fieldset style="border: 0;">
+                <div class="cartTotals">
+                    <div class="cartContents">
+                        <div class="cartTitle"></div>
+                        <div class="infoLines" style="max-height: 250px;">
+
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <!-- Angle Section -->
+    <div id="angleExpanded" class="itemExpanded">
+        <!--<div class="cartTotals">
+            <div class="cartContents">
+            <div class="cartTitle">Viewing angle</div>
+            <div style="height: 235px; margin: 0 auto; margin-bottom: 10px; width: 235px;">
+            <img src="images/centerHome.png" style="left: 124px; position: absolute; top: 137px; width: 60px;"/>
+            <svg id="svg4219" xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 401 402.42136" width="100%" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g stroke="#0068ff" stroke-width=".85257" fill="red">
+            <a xlink:href="#" ng-click="changeView('Rear')">
+            <!--<clipPath id="rearView">-->
+        <!--<defs>
+                <pattern id="rearPattern" patternUnits="userSpaceOnUse" width="1000" height="1000">
+                    <image id="viewRear" xlink:href="images/Rear.png" width="320" height="320" x="-30" y="-75"></image>
+                </pattern>
+            </defs>
+            <path id="path4247" d="m89.687 146.14c-35.615-18.94-65.116-34.58-65.558-34.74-0.911-0.34 4.872-11.26 10.033-18.951 10.78-16.054 27.013-33.861 41.5-45.524 31.668-25.495 69.148-40.292 110.32-43.551 6.0468-0.47877 11.322-0.87049 11.723-0.87049 0.40082 0 0.72876 34.145 0.72876 75.879v75.879l-3.1971 0.0101c-12.296 0.039-30.127 10.475-38.084 22.29l-2.7071 4.0198-64.755-34.442v-0.00003z" fill="url(#rearPattern)"/>
+            <!--</clipPath>-->
+        <!--<use id="use1" xlink:href="#path4247"></use>-->
+        <!--</a>
+            <a xlink:href="#" ng-click="changeView('Top')">
+            <!--<clipPath id="topView">-->
+        <!--<defs>
+                <pattern id="topPattern" patternUnits="userSpaceOnUse" width="1000" height="1000">
+                    <image id="viewTop" xlink:href="images/Top.png" x="110" y="-75" width="320" height="320"></image>
+                </pattern>
+            </defs>
+            <path id="path4237" d="m243.36 176.91c-7.6529-12.114-25.956-22.652-39.342-22.652h-3.8853v-75.947-75.947l8.7388 0.55181c36.355 2.2956 67.328 11.758 95.468 29.164 24.102 14.909 46.606 36.51 61.515 59.047 6.242 9.4357 11.985 19.563 11.415 20.132-0.69658 0.69659-130.32 69.429-130.93 69.427-0.32571-0.00083-1.6654-1.7003-2.9771-3.7765z" fill="url(#topPattern)"/>
+            <!--</clipPath>-->
+        <!--<image id="viewTop" xlink:href="images/Top.png" clip-path="url(#topView)" x="110" y="-75" width="320" height="320"></image>-->
+        <!--</a>
+            <a xlink:href="#" ng-click="changeView('Right')">
+            <!--<clipPath id="rightView">-->
+        <!--<defs>
+                <pattern id="rightPattern" patternUnits="userSpaceOnUse" width="1000" height="1000">
+                    <image id="viewRight" xlink:href="images/Right.png" x="180" y="50" width="320" height="320"></image>
+                </pattern>
+            </defs>
+            <path id="path4239" d="m310.54 263.49c-40.78-21.682-63.876-34.42-63.76-35.164 0.10081-0.64169 1.2399-4.0441 2.5313-7.561 2.0429-5.5632 2.3445-7.6132 2.3205-15.773-0.0231-7.8602-0.38764-10.413-2.2523-15.773-1.2236-3.5168-1.9667-6.6218-1.6512-6.8999 1.1184-0.98606 129.69-68.979 130.43-68.979 2.058 0 11.805 25.457 15.504 40.493 4.3158 17.544 5.4008 27.037 5.4572 47.748 0.0703 25.826-2.6496 42.569-10.716 65.962-3.36 9.7443-12.412 29.956-13.412 29.947-0.28142-0.003-29.286-15.303-64.454-34.002z" fill="url(#rightPattern)"/>
+            <!--</clipPath>-->
+        <!--<image id="viewRight" xlink:href="images/Right.png" clip-path="url(#rightView)" x="180" y="50" width="320" height="320"></image>-->
+        <!--</a>
+            <a xlink:href="#" ng-click="changeView('Left')">
+            <!--<clipPath id="leftView">-->
+        <!--<defs>
+                <pattern id="leftPattern" patternUnits="userSpaceOnUse" width="1000" height="1000">
+                    <image id="viewLeft" xlink:href="images/Left.png" x="-100" y="50" width="320" height="320"></image>
+                </pattern>
+            </defs>
+            <path id="path4245" d="m20.925 287.53c-8.77-18.55-14.005-35.41-17.428-56.11-2.2023-13.33-2.2197-45.61-0.0315-58.83 1.9931-12.042 5.7071-26.955 9.0981-36.531 2.2587-6.3784 9.0526-22.659 9.7527-23.371 0.1893-0.19251 130.09 68.608 130.75 69.246 0.13438 0.13159-0.80065 3.2625-2.0778 6.9576-1.9688 5.6961-2.3263 8.1453-2.3494 16.097-0.0238 8.1918 0.2725 10.187 2.3416 15.773 1.3029 3.5169 2.442 7.0778 2.5313 7.9132 0.12729 1.1898-13.418 8.7442-62.501 34.857-34.465 18.336-63.261 33.504-63.991 33.706-0.98167 0.2719-2.5675-2.2556-6.0901-9.7064z" fill="url(#leftPattern)"/>
+            <!--</clipPath>-->
+        <!--<image id="viewLeft" xlink:href="images/Left.png" clip-path="url(#leftView)" x="-100" y="50" width="320" height="320"></image>-->
+        <!--</a>
+            <a xlink:href="#" ng-click="changeView('Bottom')">
+            <!--<clipPath id="bottomView">-->
+        <!--<defs>
+                <pattern id="bottomPattern" patternUnits="userSpaceOnUse" width="1000" height="1000">
+                    <image id="viewBottom" xlink:href="images/Bottom.png" x="-25" y="160" width="320" height="320"></image>
+                </pattern>
+            </defs>
+            <path id="path4243" d="m174.13 399.32c-25.67-3.43-52.55-12.8-75.024-26.16-26.715-15.89-52.376-41.01-67.747-66.32-2.3631-3.8906-4.1412-7.2292-3.9514-7.419 0.18978-0.18978 29.05-15.589 64.133-34.22l63.788-33.875 3.6883 4.9065c8.0383 10.693 20.033 17.283 36.217 19.896l3.1971 0.5163v72.004 72.004l-7.8863-0.1005c-4.3374-0.0553-11.723-0.61199-16.412-1.2371z" fill="url(#bottomPattern)"/>
+            <!--</clipPath>-->
+        <!-- <image id="viewBottom" xlink:href="images/Bottom.png" clip-path="url(#bottomView)" x="-25" y="160" width="320" height="320"></image>-->
+        <!--</a>
+            <a xlink:href="#" ng-click="changeView('Front')">
+            <!--<clipPath id="frontView-->
+        <!--<defs>
+                <pattern id="frontPattern" patternUnits="userSpaceOnUse" width="1000" height="1000">
+                    <image id="viewFront" xlink:href="images/Front_Active.png" x="110" y="155" width="320" height="320" style="opacity: 1;"></image>
+                </pattern>
+            </defs>">
+            <path id="path4241" d="m200.14 328.71v-71.945l4.0497-0.54923c18.217-2.4707 31.379-10.561 40.85-25.109 0.21933-0.33692 127.3 66.985 128.4 68.019 0.8391 0.79117-7.1069 13.502-14.97 23.947-7.885 10.474-26.938 29.488-37.265 37.19-29.202 21.778-60.256 34.468-95.828 39.16-5.1457 0.67869-12.929 1.234-17.296 1.234h-7.9405v-71.945z" fill="url(#frontPattern)"/>
+            <!--</clipPath>-->
+        <!--<image id="viewFront" xlink:href="images/Front.png" clip-path="url(#frontView)" x="110" y="155" width="320" height="320" style="opacity: 1;"></image>-->
+        <!--</a>
+        </g>
+            <circle id="path7053" cx="200.55" stroke="none" cy="204.3" r="74.354" stroke-width="1.2941" fill="#fff"/>
+        </svg>
+        </div>
+        </div>
+        </div>-->
+
+        <div class="cartTotals" style="margin-top: 20px;">
+            <div class="cartContents" style="height: 100px;">
+                <div class="cartTitle">Zoom</div>
+                <zoom zoom-text="input"></zoom>
+            </div>
+        </div>
+        <!--<div style="margin: 0 auto; width: 270px;">
+                <button id="btn_fullscreen" class="btn btn-primary" style="width: 100%; margin-bottom: 20px;" ng-click="launchIntoFullscreen();">Go Fullscreen</button>
+            </div>-->
+    </div>
+
+    <!-- Cart Details -->
+    <div id="cartExpanded" class="itemExpanded">
+
+        <h4 class="eighty" style="margin-left: 14px; width:65%;">Shopping Cart</h4>
+        <a href="#" class="close axnmClose" ng-click="closeShoppingCartNav()">Close</a>
+
+        <div class="cartTotals">
+            <div class="cartContents">
+                <div class="cartTitle">
+                    Units
+                    <span style="float: right; margin-right: 26px;">Price</span>
+                </div>
+                <div class="cartLines" style="height: auto; max-height: 100px; overflow: auto; padding: 0; position: relative;">
+                    <ul id="Ul1">
+                        <li>
+                            <!--<img ng-src="{{ '../PC/_imgs/' + (baseObject.childObjects.length && (baseObject.expanded && 'blueminus72.png' || 'blueplus72.png') || 'bluedot72.png') }}"
+                                     class="treeItemImg expanded" ng-click="baseObject.expanded=!baseObject.expanded;"/>
+                                <span ng-click="objectClick($event, baseObject ,false);" ng-dblclick="objectClick($event, baseObject,true);"
+                                      class="itemDescription unselectable treeListExpanded" ng-style="baseObject.state=='selected'&& {color:'red'}" title="{{baseObject.name}}">{{baseObject.name}}</span>
+                                <img class="itemDelete" src="../PC/_imgs/blueInfo.png" ng-click="itemInfo(baseObject)"/>
+                                <img class="itemDelete hidden" src="../PC/_imgs/redx72.png" ng-click='deleteItemClick("{{baseObject.clientId}}")'/>
+                                <span class="itemCost">${{baseObject.price}}</span>-->
+                            <ul data-cost-breakdown-list="" ng-show="baseObject.expanded"></ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cartTotals">
+            <div class="cartContents">
+                <div class="cartTitle">Totals</div>
+                <div class="cartLines">
+                    Number of Units:
+                    <span style="float: right; padding-right: 20px;">{{totals.quantity}}</span>
+
+                </div>
+                <div class="cartLines">
+                    Subtotal:
+                    <span style="float: right; padding-right: 20px;">${{totals.price | number:2}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="cartTotals">
+                <div class="cartContents">
+                    <div class="cartTitle">Products Not Pictured</div>
+                    <div class="cartLines" style="height: auto; max-height: 100px; overflow: auto; padding: 0;">
+                        <ul ng-show="designAccessories.length">
+                            <li ng-repeat="cO in designAccessories">
+                                <img ng-src="{{ '../PC/_imgs/' +  (cO[1][0].childObjects.length && (cO[1][0].expanded && 'blueminus72.png' ||'blueplus72.png') || 'bluedot72.png') }}" class="treeItemImg expanded" ng-click="cO[1][0].expanded=!cO[1][0].expanded"/>
+                                <span ng-click="objectClick($event, cO[1][0],false);" ng-dblclick="objectClick($event, cO[1][0],true); "
+                                      class="itemDescription" unselectable treelistexpanded ng-style="cO[1][0].state==selected&& {color:red}" title="{{cO[1][0].name}}">{{cO[1][0].name}}</span>
+                                <img class="itemDelete" src="../PC/_imgs/redx72.png" ng-click="removeDesignAccessory(cO[1][0].productNumber);"/>
+                                <span class="itemCost">${{cO[1][0].price}}</span>
+                            </li>
+                        </ul>
+                        <span ng-hide="designAccessories.length">None</span>
+                    </div>
+                </div>
+            </div>-->
+        <div style="margin: 0 auto; width: 270px;">
+            <button id="cartMoreDetails" class="btn btn-primary axnmModalButtonPri" style="width: 100%;" ng-click="showCartDetails();"><span class="left-caret"></span>Shopping Cart Details</button>
+            <button id="btnClearConfig" class="btn btn-default axnmModalButtonDefault" style="margin-bottom: 12px; width: 46%;" ng-click="clearConfigModal()">CLEAR CART</button>
+            <button name="btnSaveConfig" id="btnSaveConfig" class="btn btn-default axnmModalButtonDefault" style="margin-bottom: 12px; margin-left: 17px; width: 46%;" ng-click="ignoreDuplicates=false;getSaveDetails();">SAVE DESIGN</button>
+        </div>
+    </div>
+
+    <!-- Apply Numbering -->
+    <div id="numberingExpanded" class="itemExpanded" style="width: 440px; color: #000;">
+        <h4 class="eighty" style="margin-left:14px;">Custom Engraving</h4>
+        <a href="#" class="close axnmClose" style="font-size:larger;position:relative;top:-6px;color:white;" ng-click="closeNumberingNav()">Close</a>
+        <div class="cartTotals" style="margin-bottom: 6px; width: 400px;">
+            <div class="cartContents">
+                <applynumbering></applynumbering>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Section -->
+    <div id="loadExpanded" class="itemExpanded" style="margin-right: 321px; max-height: 500px; overflow: auto;">
+        <h4 class="eighty" style="margin-left:14px;">Elevation</h4>
+        <a href="#" class="close axnmClose" style="font-size:larger;position:relative;top:-6px;color:white;" ng-click="closeAddElevationNav()">Close</a>
+        <div class="cartTotals">
+            <div class="cartContents">
+                <div ng-repeat="design in loadedDesigns | orderBy : 'name'">
+                    <!--<div class="cartTitle">{{project.name}}</div>-->
+                    <div class="cartLines" ng-click="loadDesign(design)" style="cursor: pointer; padding: 5px;">
+                        &emsp;{{design.name}}
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn btn-primary axnmModalButtonPri" style="width: 175px;" ng-click="startNew4CDesign()">ADD 4C ELEVATION</button>
+                    <button class="btn btn-primary axnmModalButtonPri" style="width: 175px;" ng-click="startNewCBUDesign()">ADD CBU ELEVATION</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

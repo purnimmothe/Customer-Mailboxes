@@ -1,0 +1,44 @@
+<span ng-hide="gallery">
+    <div class="outerDiv imgWrap" style="height: auto;">
+        <div id="option-image" class="option-image" style="float: left; height: 100%; position: absolute; width: 30%;" data-draggable ng-click="clickToAdd(productData)">
+            <img class="imageHover" style="border: 1px #c8c8c8 solid; display: block; height: 100%; margin: 0 auto; position: absolute;" ng-src="{{productData.thumbnailUrl}}" alt="{{productData.productNumber}}" />
+            <span class="hover-block" style="font-size: small; font-weight: bold; height: 100%; padding: 0; padding-top: 10px;" ng-show="productData.attributes.ComponentType==='container'" >Click or Drag to Add</span>
+            <span class="hover-block" style="font-size: small; font-weight: bold; height: 100%; padding: 0; padding-top: 10px;" ng-show="productData.attributes.ComponentType!=='container'">Drag to Add</span>
+        </div>
+        <div style="height: 50%; padding: 2%; position: relative; text-align: left; width: 100%;">
+            <div style="font-weight: bold; margin-left: 30%;">{{productData.name}}</div>
+            <div class="productDescriptionTile" title="{{productData.description}}">{{productData.description}}</div>
+            <div style="font-weight: bold; margin-left: 30%;">
+                ${{productData.price}}
+            <!--<span class="smallerText" style="float: right">
+                <input type="checkbox" id="compare_{{productData.productNumber}}" name="compare_{{productData.productNumber}}" ng-model="compareList" ng-change="updateCompareList(productData)" /><label class="changeColor changeCursor" for="compare_{{productData.productNumber}}">&nbsp;COMPARE</label><br />
+            </span>-->
+            </div>
+        </div>
+        <!--<div ng-show="productData.isAddedToConfig" style="bottom: 0; font-size: large; padding: 2%; position: absolute; right: 0;">
+            <span class="glyphicon glyphicon-shopping-cart" title="Product is in cart" style="margin-bottom: 40px; z-index: 7000;"></span>
+        </div>-->
+    </div>
+</span>
+
+
+<span ng-show="gallery">
+    <div class="outerDiv imgWrap {{productData.productDimId}}">
+        <div id="option-image2" style="height: 125px; padding: 2%; width: 100%;" data-draggable ng-click="clickToAdd(productData)">
+            <img class="imageHover" style="border: 1px #c8c8c8 solid; height: 100%; width: 100%;" ng-src="{{productData.thumbnailUrl}}" alt="{{productData.productNumber}}" />
+            <span class="hover-block" style="font-weight: bold;" ng-show="productData.attributes.ComponentType==='container'">Click or Drag to Add</span>
+            <span class="hover-block" style="font-weight: bold;" ng-show="productData.attributes.ComponentType!=='container'">Drag to Add</span>
+            <!--<div ng-show="productData.isAddedToConfig" style="bottom: 0; font-size: large; padding: 2%; position: absolute; right: 0;">
+                <span class="glyphicon glyphicon-shopping-cart" title="Product is in cart" style="z-index: 7000;"></span>
+            </div>-->
+        </div>
+        <div style="height: 36%; padding: 2%; position: relative; text-align: left; width: 100%;">
+            <div style="font-weight: bold;">{{productData.name}}</div>
+            <div class="productDescription" title="{{productData.description}}">{{productData.description}}</div>
+            <div style="font-weight: bold;">${{productData.price}}</div>
+            <!--<span class="smallerText" style="position: absolute; bottom: 0;">
+                <input type="checkbox" id="Checkbox1" name="compare_{{productData.productNumber}}" ng-model="compareList" ng-change="updateCompareList(productData)" /><label class="changeColor changeCursor" for="compare_{{productData.productNumber}}">&nbsp;COMPARE</label><br />
+            </span>-->
+        </div>
+    </div>
+</span>

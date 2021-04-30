@@ -1,0 +1,246 @@
+<div style="position:relative;height:42px;font-weight:bold;font-size:17px;">
+    <button class="headerButtonSecondary" ng-show="mounttype=='recessed'||mounttype=='surface'||mounttype=='free'"
+        style="width: 18%;font-size:15px; background: #c6c9d0; color: #384c6f;" ng-click="openCategoryHelp()">
+        HELP<br /><label style="position:relative;top:-3px">?</label>
+        <button class="headerButtonSecondary" ng-show="mounttype=='standard'||mounttype=='regency'"
+            style="width: 18%;font-size:15px; background: #c6c9d0; color: #384c6f;" ng-click="openCBUHelp()">
+            HELP<br /><label style="position:relative;top:-3px">?</label>
+        </button><button id="componentsCategory"
+            ng-show="mounttype=='recessed'||mounttype=='surface'||mounttype=='free'" class="headerButton"
+            style="width: 50%; color: #fff; background: #384c6f;" ng-click="openComponentCategory()">
+            COMPONENTS<br /><label style="font-size: 11px; top: -8px; position: relative;">(CUSTOMIZE UNITS)</label>
+        </button><button id="unitsCategory" ng-show="mounttype=='recessed'||mounttype=='surface'||mounttype=='free'"
+            class="headerButton" style="width: 32%; color: #fff; background: #384c6f;" ng-click="openUnitCategory()">
+            4C UNITS
+        </button>
+        <button id="standardCBUCategory" ng-show="mounttype=='standard'" class="headerButton"
+            style="width: 82%; color: #fff; background: #384c6f;">
+            STANDARD CBU/OPL
+        </button>
+        <button id="regencyCBUCategory" ng-show="mounttype=='regency'" class="headerButton"
+            style="width: 82%; color: #fff; background: #384c6f;">
+            REGENCY CBU/OPL
+        </button>
+</div>
+<div id="unitNav" ng-show="mounttype=='recessed'||mounttype=='surface'||mounttype=='free'"
+    style="height: 40px; position: relative;">
+    <img alt="" src="images/mbx_dropdown.png" style="position: absolute;" usemap="#prodNavDropdownMap">
+    <map name="prodNavDropdownMap" id="prodNavDropdownMap">
+        <area id="navDropdown" alt="Nav Dropdown" title="Navigation Dropdown" href="#" ng-click="breadcrumbDropdown();"
+            shape="poly" coords="261, 0, 299, 0, 299, 39, 261, 39, 250, 20" style="outline: none;" />
+    </map>
+    <label style="position:absolute; margin-left: 12px; padding-top: 9px; font-size: 17px;"
+        title="{{currentCategory.label  + (currentCategory.description.length > 0 ? ' - ' : '') + currentCategory.description}}">{{currentCategory.label
+        + (currentCategory.description.length > 0 ? " - " : "")}}<span
+            style="font-size:13px;">{{currentCategory.description}}</span></label>
+</div>
+<div class="headerDropdown" id="breadcrumbDropdown" ng-if="breadcrumbArray" style="left:150px;top:81px;">
+    <div style="padding: 5px; background-color: #EBEEF2; border: 2px solid #95989F;">
+        <div class="infoLines" style="margin: 0; padding: 0;max-height:none;">
+            <span class="breadcrumbs"
+                style="padding: 5px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;border-bottom-style: solid;border-bottom-color: #a0a0a0;border-bottom-width: 1px;">Standard
+                Height</span>
+            <span ng-repeat="bc in breadcrumbArray" ng-if="bc.standardHeight">
+                <span class="breadcrumbs" ng-click="openCategory(bc);">
+                    <span
+                        style="padding: 5px 10px 5px 10px; display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+                        title="{{bc.label}}">{{bc.label}}</span>
+                </span>
+            </span>
+            <span class="breadcrumbs" ng-hide="hideNonstandardHeights"
+                style="padding: 5px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;border-bottom-style: solid;border-bottom-color: #a0a0a0;border-bottom-width: 1px;">Custom
+                Height</span>
+            <span ng-hide="hideNonstandardHeights" ng-repeat="bc in breadcrumbArray" ng-if="!bc.standardHeight">
+                <span class="breadcrumbs" ng-click="openCategory(bc);">
+                    <span
+                        style="padding: 5px 10px 5px 10px; display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+                        title="{{bc.label}}">{{bc.label}}</span>
+                </span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="categoryContainer" style="position:inherit;">
+    <div id="resultSortView" style="min-height: 40px; width: 100%; padding: 2px 0px;">
+        <span style="display:inline-block; font-size:smaller;">
+            <label style="margin-bottom:8px;font-size:10px;">Color: </label>
+            <select ng-model="selectedFinish"
+                ng-options="finish as finish.name for finish in getAvailableFinishes() track by finish.name"
+                ng-change="finishChange()" style="font-size:10px;">
+                <!--<option value="A">Aluminum</option>
+                <option value="Z">Bronze</option>
+                <option value="G">Gold</option>
+                <option value="S">Sandstone</option>-->
+            </select>
+            <br />
+            <input ng-show="mounttype=='recessed'||mounttype=='surface'||mounttype=='free'" type="checkbox"
+                name="filterWOParcel" ng-model="filterWithParcelLockers" value="True" ng-change="filterProducts()"
+                style="        margin: 0px;
+" />
+            <label ng-show="mounttype=='recessed'||mounttype=='surface'||mounttype=='free'"
+                style="position: relative; top: -3px; margin-bottom: 0px; font-size: 10px;">With Parcel
+                Locker(s)</label>
+            <label ng-show="mounttype=='standard'||mounttype=='regency'"
+                style="position: relative; top: -3px; margin-bottom: 0px; font-size: 10px;"></label>
+            <br />
+            <input ng-show="mounttype=='recessed'||mounttype=='surface'||mounttype=='free'" type="checkbox"
+                name="filterWithParcel" ng-model="filterWOParcelLockers" value="True" ng-change="filterProducts()"
+                style="margin:0px;" />
+            <label ng-show="mounttype=='recessed'||mounttype=='surface'||mounttype=='free'"
+                style="position: relative; top: -3px; margin-bottom: 0px; font-size: 10px;">Without Parcel
+                Locker(s)</label>
+            <label ng-show="mounttype=='standard'||mounttype=='regency'"
+                style="position: relative; top: -3px; margin-bottom: 0px; font-size: 10px;"></label>
+            <br />
+            <input ng-show="mounttype=='recessed'||mounttype=='surface'||mounttype=='free'" type="checkbox"
+                name="filterAda" ng-model="filterAda" ng-change="adaFilterChange()" style="margin:0px;" />
+            <label ng-show="mounttype=='recessed'||mounttype=='surface'||mounttype=='free'"
+                style="position: relative; top: -3px; font-size: 10px;">ADA Compliant Units</label>
+            <label ng-show="mounttype=='standard'||mounttype=='regency'"
+                style="position: relative; top: -3px; margin-bottom: 0px; font-size: 10px;"></label>
+        </span>
+        <span style="float: right; width: 60px; margin: 0 1% 0 1%;">
+            <label style="font-size:10px;position:relative;left:15px;">Views</label>
+            <div class="switch-toggle switch-candy" style="height: 34px; border-radius: 6px;">
+                <input id="list" name="view" type="radio" checked ng-click="changeView('list');">
+                <label for="list" title="List view"><span class="glyphicon glyphicon-list"></span></label>
+
+                <input id="gallery" name="view" type="radio" ng-click="changeView('gallery');">
+                <label for="gallery" title="Gallery view"><span class="glyphicon glyphicon-th-large"></span></label>
+
+                <a></a>
+            </div>
+        </span>
+        <!--<span title="Compare">
+            <button id="btn_compare" class="btn btn-primary" disabled style="background-image: url('images/compare.png'); background-size: contain; background-repeat: no-repeat;">&nbsp;</button>
+        </span>-->
+        <span>
+            <!--<button id="btn_sort" class="btn btn-primary" style="background-image: url('{{sortImageUrl}}');margin-top:23px;" title="Sort" ng-click="toggleSort();">
+                &nbsp;
+            </button>-->
+            <span class="sortItems"
+                style="height: 155px; z-index: 200; display: none; top: 129px;left:inherit;right:0;">
+                <span id="mbxDefaultLowToHigh" class="hoverColor" ng-click="changeSort('mbxDefaultLowToHigh');">
+                    Default Sort
+                </span>
+                <span id="priceLowToHigh" class="hoverColor" ng-click="changeSort('priceLowToHigh');">
+                    Price 0-9
+                </span>
+                <span id="priceHighToLow" class="hoverColor" ng-click="changeSort('priceHighToLow');">
+                    Price 9-0
+                </span>
+                <span id="prodNumLowToHigh" class="hoverColor" ng-click="changeSort('prodNumLowToHigh');">
+                    Product No. A-Z
+                </span>
+                <span id="prodNumHighToLow" class="hoverColor" ng-click="changeSort('prodNumHighToLow');">
+                    Product No. Z-A
+                </span>
+            </span>
+        </span>
+    </div>
+    <div class="insideCategoryContainer">
+        <div id="searchDiv" style="display: none; margin-top: 10px; text-align: center;">
+            <form id="config-search" ng-submit="searchCount();">
+                <input type="text" placeholder="Search product # or description" ng-model="searchString"
+                    id="searchDivInput" />
+                <input type="button" value="X" id="searchDivClear" ng-click="searchString=''; searchCount();" />
+            </form>
+        </div>
+        <div id="ultoggle" class="" ng-switch on="mode" style="overflow-x: hidden;">
+            <div class="ptslide" ng-switch-when="subcategory">
+                <div style="margin: 16px 3% 16px 5%; color: #064CA5; width: 98%; font-weight: bold;">Standard Height
+                    Units</div>
+                <ul class="nav nav-stacked nav-pills changeColor">
+                    <li ng-repeat="category in categories" ng-if="category.standardHeight"
+                        style="margin-top: 1px; margin-left: 1%;" class="outerDiv">
+                        <a href="#" ng-click="openCategory(category)">{{category.label + " - " +
+                            category.description}}<span style="float: right;" class="condense-arrow">&gt;</span></a>
+                    </li>
+                </ul>
+                <div ng-hide="hideNonstandardHeights"
+                    style="margin: 16px 3% 16px 2%; padding-top: 16px; padding-left: 3%; color: #064CA5; width: 98%; border-top: 1px solid #064CA5; font-weight: bold;">
+                    Custom Height Units</div>
+                <ul ng-hide="hideNonstandardHeights" class="nav nav-stacked nav-pills changeColor">
+                    <li ng-repeat="category in categories" ng-if="!category.standardHeight"
+                        style="margin-top: 1px; margin-left: 1%;" class="outerDiv">
+                        <a href="#" ng-click="openCategory(category)">{{category.label + " - " +
+                            category.description}}<span style="float: right;" class="condense-arrow">&gt;</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="ptslide" ng-switch-when="products">
+                <div id="productsContent" style="width: 100%; height: auto;">
+                    <div ng-controller="PaginationCtrl">
+                        <div ng-repeat="productGroup in pagedItems">
+                            <div ng-show="!!productGroup.name" ng-style="productGroup.style">{{productGroup.name}}</div>
+                            <div ng-repeat="product in productGroup | orderBy:sortFunction:reverseSort"
+                                style="float: left; padding-right: 0; position: relative;"
+                                ng-style="!gallery && {'width':'100%'} || gallery && {'width':'50%'}">
+                                <product-node productdata="product" gallery="gallery"></product-node>
+                            </div>
+                        </div>
+                        <div class="pagination"
+                            style="position: fixed; bottom: 3px; background-color: #E9ECF0; /*text-align: center; */ width: 280px; display: none; /*block;*/ margin: 0 auto; z-index: 100; text-align: center;">
+                            <ul class="pagination" style="margin: 0 auto; padding-top: 4px; margin-right: 55px;">
+                                <li ng-class="prevPageDisabled()">
+                                    <a href="#" aria-label="Previous" ng-click="prevPage()">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="n in range()" ng-class="{active: n == currentPage}"><a href="#"
+                                        ng-click="setPage(n)">{{n+1}}</a></li>
+                                <li ng-class="nextPageDisabled()">
+                                    <a href="#" aria-label="Next" ng-click="nextPage()">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <span style="position: absolute; padding: 4px 10px; right: 0;">
+                                <select style="height: 34px; max-width: 65px;" ng-model="itemsPerPage"
+                                    ng-change="selectChange()">
+                                    <optgroup label="Select # per page"></optgroup>
+                                    <option value="20">20</option>
+                                    <option value="40">40</option>
+                                    <option value="60">60</option>
+                                    <option value="All">All</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="ptslide" ng-switch-default>
+                <ul class="nav nav-stacked nav-pills changeColor" style="position: relative; overflow: hidden;">
+                    <li ng-repeat="category in rootCategories" style="margin-top: 0px;">
+                        <a href="#" ng-click="openCategory(category)">
+                            <img ng-src="{{category.thumbnailUrl}}" ng-show="category.thumbnailUrl"
+                                class="categoryThumbnail" />
+                            <span class="categoryLabel">{{category.label}}</span>
+                            <span style="float: right; display: inline-block;" class="condense-arrow">&gt;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="loading" style="top:0;z-index:100;">
+    <div class="bulat">
+        <div id="dalbulat">
+            <span>L</span>
+            <span>O</span>
+            <span>A</span>
+            <span>D</span>
+            <span>I</span>
+            <span>N</span>
+            <span>G</span>
+        </div>
+        <div class="luarbulat"></div>
+    </div>
+    <div class="name">
+        <a href="http://www.pixelmimic.com/"></a>
+    </div>
+</div>
